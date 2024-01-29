@@ -1,11 +1,12 @@
-const express=require("express");
-const app=express();
+const WebSocket = require('ws');
 
-app.get('/User',(req,res)=>
-{
-    res.status(200).json({messgae:"it's working"})
-})
-app.listen(2000,()=>
-{
-    console.log(`Server is running on ${2000}`);
+const server = new WebSocket.Server({port : 8099})
+server.on('connection', (ws) => {
+  console.log('Client connected');
+
+  
+  setInterval(()=>
+  {
+    ws.send("hello world!")
+  },3000)
 })
